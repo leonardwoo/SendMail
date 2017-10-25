@@ -1,0 +1,13 @@
+language: java
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+jdk:
+  - oraclejdk8
+  - oraclejdk9
+deploy:
+  provider: releases
+  api_key: System.getenv("api-key")
+  file: "SendMail.jar"
+  skip_cleanup: true
+  on:
+    tags: true
