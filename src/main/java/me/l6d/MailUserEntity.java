@@ -27,29 +27,39 @@ public class MailUserEntity {
     private String mailAddress;
     private String displayName;
     private String stmpAddress;
+    private Integer port;
     private String password;
     private String username;
     private Boolean isTls;
 
-    public void init(){
+    public MailUserEntity init(){
         mailAddress = "";
         displayName = "";
         stmpAddress = "";
+        port = 0;
         password = "";
         username = "";
         isTls = false;
+        return this;
     }
 
     @Override
     public String toString() {
         return "{" +
-                "mailAddress:'" + mailAddress + '\'' +
-                ", displayName:'" + displayName + '\'' +
-                ", stmpAddress:'" + stmpAddress + '\'' +
-                ", password:'" + password + '\'' +
-                ", username:'" + username + '\'' +
-                ", isTls:" + isTls +
+                " 'mailAddress':'" + mailAddress + '\'' +
+                ", 'displayName':'" + displayName + '\'' +
+                ", 'stmpAddress':'" + stmpAddress + '\'' +
+                ", 'port':" + port +
+                ", 'password':'" + password + '\'' +
+                ", 'username':'" + username + '\'' +
+                ", 'isTls':" + isTls +
                 '}';
+    }
+
+    public Boolean isEmpty(){
+        return !StringUtil.hasLength(mailAddress) && !StringUtil.hasLength(displayName) && !StringUtil.hasLength(stmpAddress)
+                && StringUtil.isEmpty(port) && !StringUtil.hasLength(password) && !StringUtil.hasLength(username)
+                && StringUtil.isEmpty(isTls);
     }
 
     public String getMailAddress() {
@@ -74,6 +84,14 @@ public class MailUserEntity {
 
     public void setStmpAddress(String stmpAddress) {
         this.stmpAddress = stmpAddress;
+    }
+
+    public Integer getPort() {
+        return port;
+    }
+
+    public void setPort(Integer port) {
+        this.port = port;
     }
 
     public String getPassword() {
