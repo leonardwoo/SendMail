@@ -1,3 +1,3 @@
 # Send Mail Client
 
-<img src="https://travis-ci.org/leonardwu/SendMail.svg?branch=master" alt="build:passed">
+[![Build Status](https://travis-ci.org/leonardwu/SendMail.svg?branch=master)](https://travis-ci.org/leonardwu/SendMail)
