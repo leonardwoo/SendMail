@@ -16,6 +16,8 @@
 package me.l6d;
 
 import com.google.gson.Gson;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -135,45 +137,76 @@ public class Controller {
 
     @FXML
     public void sendMail(ActionEvent event){
-        MailEntity mail = new MailEntity();
+        disableAll();
 
-        String toAddrs = to_addr.getText();
-        if(!toAddrs.isEmpty()) {
-            ArrayList<String> toList = new ArrayList<>();
-            if(toAddrs.contains(DELIMITER)) {
-                toList.addAll(Arrays.asList(toAddrs.split(DELIMITER)));
-            } else {
-                toList.add(toAddrs);
-            }
-            mail.setToList(toList);
-        }
+        //new Thread(new sendMailTask()).start();
+        Platform.runLater(new sendMailTask());
 
-        String ccAddrs = cc_addr.getText();
-        if(!ccAddrs.isEmpty()) {
-            ArrayList<String> ccList = new ArrayList<>();
-            if(ccAddrs.contains(DELIMITER)) {
-                ccList.addAll(Arrays.asList(ccAddrs.split(DELIMITER)));
-            } else {
-                ccList.add(ccAddrs);
-            }
-            mail.setCcList(ccList);
-        }
-
-        String bccAddrs = bcc_addr.getText();
-        if(!bccAddrs.isEmpty()) {
-            ArrayList<String> bccList = new ArrayList<>();
-            if(bccAddrs.contains(DELIMITER)) {
-                bccList.addAll(Arrays.asList(bccAddrs.split(DELIMITER)));
-            } else {
-                bccList.add(bccAddrs);
-            }
-            mail.setCcList(bccList);
-        }
-
-        mail.setSubject(subject_txt.getText());
-        mail.setText(mail_text.getText());
-
-        MailUtil.sendMail(mailUser, mail);
+        enableAll();
     }
 
+    private void disableAll() {
+        settingTab.setDisable(true);
+        to_addr.setDisable(true);
+        cc_addr.setDisable(true);
+        bcc_addr.setDisable(true);
+        subject_txt.setDisable(true);
+        mail_text.setDisable(true);
+        send_btn.setDisable(true);
+    }
+
+    private void enableAll() {
+        settingTab.setDisable(false);
+        to_addr.setDisable(false);
+        cc_addr.setDisable(false);
+        bcc_addr.setDisable(false);
+        subject_txt.setDisable(false);
+        mail_text.setDisable(false);
+        send_btn.setDisable(false);
+    }
+
+    class sendMailTask extends Task {
+        @Override
+        protected Boolean call() throws Exception {
+            MailEntity mail = new MailEntity();
+
+            String toAddrs = to_addr.getText();
+            if(!toAddrs.isEmpty()) {
+                ArrayList<String> toList = new ArrayList<>();
+                if(toAddrs.contains(DELIMITER)) {
+                    toList.addAll(Arrays.asList(toAddrs.split(DELIMITER)));
+                } else {
+                    toList.add(toAddrs);
+                }
+                mail.setToList(toList);
+            }
+
+            String ccAddrs = cc_addr.getText();
+            if(!ccAddrs.isEmpty()) {
+                ArrayList<String> ccList = new ArrayList<>();
+                if(ccAddrs.contains(DELIMITER)) {
+                    ccList.addAll(Arrays.asList(ccAddrs.split(DELIMITER)));
+                } else {
+                    ccList.add(ccAddrs);
+                }
+                mail.setCcList(ccList);
+            }
+
+            String bccAddrs = bcc_addr.getText();
+            if(!bccAddrs.isEmpty()) {
+                ArrayList<String> bccList = new ArrayList<>();
+                if(bccAddrs.contains(DELIMITER)) {
+                    bccList.addAll(Arrays.asList(bccAddrs.split(DELIMITER)));
+                } else {
+                    bccList.add(bccAddrs);
+                }
+                mail.setCcList(bccList);
+            }
+
+            mail.setSubject(subject_txt.getText());
+            mail.setText(mail_text.getText());
+
+            return MailUtil.sendMail(mailUser, mail);
+        }
+    }
 }
