@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
@@ -14,7 +11,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<TabPane minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.l6d.Controller">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="506.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.l6d.Controller">
   <tabs>
     <Tab fx:id="mainTab" onSelectionChanged="#loadMainTab" text="Default">
          <content>
@@ -37,7 +34,7 @@
          </content></Tab>
     <Tab fx:id="settingTab" onSelectionChanged="#loadSettingTab" text="Setting">
          <content>
-            <Pane prefHeight="200.0" prefWidth="200.0">
+            <Pane prefHeight="367.0" prefWidth="529.0">
                <children>
                   <Label layoutX="34.0" layoutY="15.0" text="Mail Address" />
                   <Label layoutX="30.0" layoutY="45.0" text="Display Name" />

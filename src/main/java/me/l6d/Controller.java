@@ -90,7 +90,7 @@ public class Controller {
 
     @FXML
     public void initialize() {
-        mailUser = new Gson().fromJson(FileUnit.loadFileReader("config.json"), MailUserEntity.class);
+        mailUser = new Gson().fromJson(FileUtil.loadFileReader("config.json"), MailUserEntity.class);
         if(mailUser == null) {
             mailUser = MailUserEntity.getInstance().init();
         }
@@ -126,7 +126,7 @@ public class Controller {
         mailUser.setUsername(usr.getText());
         mailUser.setTls(isTls.isSelected());
 
-        FileUnit.saveFileWrite("config.json", new Gson().toJson(mailUser));
+        FileUtil.saveFileWrite("config.json", new Gson().toJson(mailUser));
     }
 
     @FXML

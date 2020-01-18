@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 
-public class FileUnit {
-    private static Logger logger = LogManager.getLogger("FileUnit");
+public class FileUtil {
+    private static Logger logger = LogManager.getLogger(FileUtil.class.getName());
 
     public static InputStream loadFileInputStream(String filePath){
         File f = new File(filePath);
